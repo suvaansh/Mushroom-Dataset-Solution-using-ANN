@@ -154,7 +154,7 @@ Y2CV = Y2(newindexCV,:);
 %Now we will train a neural network using this dataset and check its
 %accuracy by using Cross-Validation set
 input_layer_size2  = 21;   % 21 attributes 
-hidden_layer_size2 = 10;   % 13 hidden units and a single hidden layer
+hidden_layer_size2 = 13;   % 13 hidden units and a single hidden layer
 num_labels2 = 4;          % 4 labels, from 1 to 4   
 
 %Randomly initializing weights for the same reason mentioned before
@@ -165,8 +165,8 @@ initial_Theta4 = randInitializeWeights(hidden_layer_size2, num_labels2);
 initial_nn_params2 = [initial_Theta3(:) ; initial_Theta4(:)];
 
                           
-options = optimset('MaxIter', 250);
-lambda2 = 10;  %regularisation parameter
+options = optimset('MaxIter', 200);
+lambda2 = 0;  %regularisation parameter
 
 costFunction = @(p1) nnCostFunction(p1,input_layer_size2,hidden_layer_size2,num_labels2, X2train, Y2train, lambda2);
 
@@ -184,7 +184,7 @@ Theta4 = reshape(nn_params2((1 + (hidden_layer_size2 * (input_layer_size2 + 1)))
              
 testpred2 = predict(Theta3, Theta4, X2CV);
 
-fprintf('\n Accuracy: %f\n', mean(double(testpred2 == Y2CV)) * 100);
+fprintf('\nTraining Set Accuracy: %f\n', mean(double(testpred2 == Y2CV)) * 100);
 
 
 %Now we are loading the mushroom_test dataset
@@ -226,7 +226,7 @@ X3 = [non_missing_cat_test_data(:,1:9) non_missing_cat_test_data(:,11:end) norm_
 Y3 = non_missing_cat_test_data(:,10);
 for i = 1: length(Y3),
     if(Y3(i,1)>3),
-        Y3(i,1) = Y3(i,1)-1;
+        Y3 = Y3-1;
     end;
 end;
 
@@ -264,6 +264,6 @@ for i=1:size(Final_classes,1),
         Final_classes(i,1)='e';
     end;
 end;
-Final_classes = char(Final_classes);
+f = char(Final_classes);
 
-%Final_classes if the final predicted answer for the dataset
+
