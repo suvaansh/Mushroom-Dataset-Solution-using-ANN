@@ -3,9 +3,6 @@
 Solution for the mushroom dataset using matlab machine learning toolbox.
 
 The solution is contained in the file "solution.csv" which contains the predicted values of classes for the given data.
-the solution is mixed because I had to separate out the data entries with missing values of stalk root and with.
-So actually firstly there is solution of all the class values for all the data entries having the value of stalk roots and then the data entries with missing values of stalk root.
-I completed it late so in hurry I forgot to arrange them back in order.
 
 Then the file 'solution_code.m' contains the source code
 
