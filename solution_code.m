@@ -17,8 +17,8 @@ mod_cat_data = categoricaldata;  %mod_cat_data => modified categorical data
 %data
 mod_cat_data(:,1) = []; %This is the labeled class itself
 mod_cat_data(:,6) = []; %gill-attachment have 97.64% of the values as f
-mod_cat_data(:,15) = []; %veil type have 100% of the values as p
-mod_cat_data(:,15) = []; %veil colour have 97.73% of the values as w
+mod_cat_data(:,15) = []; %veil-type have 100% of the values as p
+mod_cat_data(:,15) = []; %veil-colour have 97.73% of the values as w
 
 %Converting alphabetical data to numerical form
 proc_cat_data = grp2idx(mod_cat_data(:,1));   %proc_cat_data => processed categorical data
@@ -207,7 +207,7 @@ for i = 2:size(categorictestdata,2),
 proc_cat_test_data = [proc_cat_test_data grp2idx(categorictestdata(:,i))];
 end;
 
-testindex = find(proc_cat_test_data(:,10) == 1);
+testindex = find(proc_cat_test_data(:,10) == 3);
 
 missing_cat_test_data = proc_cat_test_data(testindex,:);%missig_cat_test_data => categorical test data with missing stalk root values
 non_missing_cat_test_data = proc_cat_test_data;%non_missig_cat_test_data => categorical test data with having stalk root values
@@ -222,7 +222,12 @@ norm_missing_num_test_data = featureNormalize(missing_num_test_data);
 
 X3 = [non_missing_cat_test_data(:,1:9) non_missing_cat_test_data(:,11:end) norm_non_missing_num_test_data];
 Y3 = non_missing_cat_test_data(:,10);
-Y3 = Y3-1;
+for i = 1: length(Y3),
+    if(Y3(i,1)>3),
+        Y3 = Y3-1;
+    end;
+end;
+
 
 X3predict = [missing_cat_test_data(:,1:9) missing_cat_test_data(:,11:end) missing_num_test_data];
 %X3predict => test set data with missing stalk root values that is to be predicted
