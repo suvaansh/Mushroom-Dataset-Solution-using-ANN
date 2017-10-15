@@ -154,7 +154,7 @@ Y2CV = Y2(newindexCV,:);
 %Now we will train a neural network using this dataset and check its
 %accuracy by using Cross-Validation set
 input_layer_size2  = 21;   % 21 attributes 
-hidden_layer_size2 = 16;   % 17 hidden units and a single hidden layer
+hidden_layer_size2 = 9;   % 17 hidden units and a single hidden layer
 num_labels2 = 4;          % 4 labels, from 1 to 4   
 
 %Randomly initializing weights for the same reason mentioned before
@@ -165,7 +165,7 @@ initial_Theta4 = randInitializeWeights(hidden_layer_size2, num_labels2);
 initial_nn_params2 = [initial_Theta3(:) ; initial_Theta4(:)];
 
                           
-options = optimset('MaxIter', 250);
+options = optimset('MaxIter', 200);
 lambda2 = 0;  %regularisation parameter
 
 costFunction = @(p1) nnCostFunction(p1,input_layer_size2,hidden_layer_size2,num_labels2, X2train, Y2train, lambda2);
